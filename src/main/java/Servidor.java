@@ -7,21 +7,32 @@ public class Servidor {
 
     public static void main(String[] args) throws IOException {
 
-        ServerSocket servidor = new ServerSocket(6868);
+        ServerSocket servidor = new ServerSocket(8090);
         System.out.println("Porta Aberta");
 
         Socket cliente = servidor.accept();
 
-        System.out.println("Nova Conexão com o Cliente" + cliente.getInetAddress().getHostAddress());
+        System.out.println("Nova Conexão com o Cliente " + cliente.getInetAddress().getHostAddress());
 
         Scanner scanner = new Scanner(cliente.getInputStream());
+
+        String mensagem = "";
+
         while (scanner.hasNextLine()){
-            System.out.println(scanner.nextLine());
+
+            mensagem = scanner.nextLine();
+
+            if(mensagem.equals("!sair")){
+                System.out.println("O cliente foi desconectado!");
+               break;
+            }
+
+            System.out.println(mensagem);
         }
 
         scanner.close();
-        servidor.close();
         cliente.close();
+        servidor.close();
     }
 
 }

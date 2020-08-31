@@ -1,14 +1,14 @@
 import java.io.IOException;
 import java.io.PrintStream;
 import java.net.Socket;
-import java.net.UnknownHostException;
 import java.util.Scanner;
 
 public class Cliente {
 
-    public static void main(String[] args) throws IOException, UnknownHostException {
+    public static void main(String[] args) throws IOException {
 
-        Socket cliente = new Socket("192.168.1.71", 6868);
+        Socket cliente = new Socket("0.tcp.ngrok.io",  18550);
+        // 0.tcp.ngrok.io:13464
 
         System.out.println("O cliente Foi Conectado!");
 
