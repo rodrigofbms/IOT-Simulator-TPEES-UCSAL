@@ -7,22 +7,37 @@ public class Cliente {
 
     public static void main(String[] args) throws IOException {
 
-        Socket cliente = new Socket("0.tcp.ngrok.io",  18550);
-        // 0.tcp.ngrok.io:13464
+        Servidor servidor = new Servidor();
+
+        Socket cliente = new Socket("3.13.191.225",  13729);
 
         System.out.println("O cliente Foi Conectado!");
 
         Scanner teclado = new Scanner(System.in);
 
+        Scanner scannerServidor = new Scanner(cliente.getInputStream());
+
         PrintStream saida = new PrintStream(cliente.getOutputStream());
 
-        while (teclado.hasNextLine()) {
-            saida.println(teclado.nextLine());
+
+        saida.println(teclado.nextLine());
+
+        while (true) {
+
+            System.out.println(scannerServidor.nextLine());
+
+                if(scannerServidor.nextLine().contains("ATIVADO")) {
+                    while (scannerServidor.hasNextLine()) {
+
+                       System.out.println(scannerServidor.nextLine());
+
+                    }
+                }
         }
 
-        cliente.close();
-        saida.close();
-        teclado.close();
+        //cliente.close();
+       // saida.close();
+        //teclado.close();
     }
 
 }
